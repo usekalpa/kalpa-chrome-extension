@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      background: #0f1116;
+      color: #e8eaf2;
+      padding: 20px;
+    }
+    .card {
+      max-width: 420px;
+      background: #161a23;
+      border: 1px solid #2a2f3f;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #a6aec4;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #2a2f3f;
+      background: #11141c;
+      color: #e8eaf2;
+    }
+    button {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #facc15, #eab308);
+      color: #1c1705;
+      cursor: pointer;
+    }
+    .status { margin-top: 8px; font-size: 12px; color: #a6aec4; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h3>Extension Settings</h3>
+    <label for="convexUrl">Convex URL (self-hosted or cloud)</label>
+    <input id="convexUrl" type="text" placeholder="https://convex.usekalpa.com" />
+
+    <label for="webAppUrl">Kalpa Web App URL (for Clerk token)</label>
+    <input id="webAppUrl" type="text" placeholder="https://usekalpa.com" />
+
+    <button id="saveBtn">Save Settings</button>
+    
+    <hr style="border-color: #2a2f3f; margin: 20px 0;" />
+    
+    <h4 style="margin-bottom: 8px;">Security</h4>
+    <p style="font-size: 12px; color: #a6aec4; margin-bottom: 12px;">
+      Tokens are stored locally and expire after ~1 hour. Click below to clear your stored token.
+    </p>
+    <button id="clearTokenBtn" style="background: #dc2626; color: white;">Clear Stored Token</button>
+    
+    <div id="status" class="status"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

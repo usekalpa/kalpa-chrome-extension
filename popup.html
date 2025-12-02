@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1116;
+      --card: #161a23;
+      --muted: #8b92a7;
+      --text: #e8eaf2;
+      --primary: #facc15;
+      --primary-hover: #eab308;
+      --border: #2a2f3f;
+      --success: #10b981;
+      --error: #ef4444;
+    }
+    body {
+      width: 340px;
+      margin: 0;
+      padding: 16px;
+      font-family: "Space Grotesk", "SF Pro Text", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1c1705;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .titleblock {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #a6aec4;
+    }
+    .field-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 12px 0 6px;
+    }
+    .pill {
+      padding: 6px 8px;
+      background: #1f2533;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      word-break: break-all;
+      margin-bottom: 6px;
+    }
+    .input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 9px 10px;
+      background: #11141c;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      font-size: 13px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    select.input {
+      padding-right: 28px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238b92a7' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 16px;
+    }
+    .input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .checkbox {
+      accent-color: var(--primary);
+    }
+    .button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #0f0f12;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 12px;
+    }
+    .button:hover { opacity: 0.95; }
+    .button:active { transform: translateY(1px); }
+    .button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .msg { margin-top: 10px; font-size: 12px; text-align: center; }
+    .msg.success { color: var(--success); }
+    .msg.error { color: var(--error); }
+    .note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .ghost-btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      background: #11141c;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border 0.2s, color 0.2s;
+    }
+    .ghost-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .ghost-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    /* Auth section styles */
+    .auth-section {
+      background: #11141c;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-top: 12px;
+    }
+    .auth-section-bottom {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+    }
+    .auth-signed-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .auth-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .auth-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #0f0f12;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .auth-status {
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 600;
+    }
+    .auth-email {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .auth-signout {
+      font-size: 11px;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .auth-signout:hover {
+      color: var(--text);
+    }
+    .auth-signed-out {
+      text-align: center;
+    }
+    .auth-warning {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .signin-btn {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--primary);
+      color: #0f0f12;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .signin-btn:hover {
+      opacity: 0.9;
+    }
+    .signin-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="logo" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28">
+          <path fill="#ffd230" d="M44.528 46.267S37.443 35.027 43.116 24c6.339-12.322 1.156-22.268 1.156-22.268H5.085s5.173 9.945-1.16 22.264c-5.67 11.03 1.45 22.271 1.45 22.271z" opacity=".15"/><path fill="gold" fill-rule="nonzero" d="m45.323 0 .485.932c.085.163.216.44.376.826.256.618.51 1.33.747 2.13a26.6 26.6 0 0 1 1.048 8.589c-.157 4.066-1.207 8.203-3.323 12.315q-.145.281-.279.565c-2.498 5.298-2.154 11.02-.039 16.51.371.963.768 1.833 1.162 2.592a18 18 0 0 0 .494.885l1.673 2.655H4.421l-.51-.805q-.061-.095-.191-.318-.206-.355-.45-.82a29 29 0 0 1-1.332-2.952C.91 40.449.226 37.619.046 34.694c-.229-3.733.385-7.377 2.01-10.822q.158-.336.328-.668c1.879-3.653 2.803-7.295 2.941-10.865.107-2.73-.25-5.247-.906-7.473a18 18 0 0 0-.623-1.782 11 11 0 0 0-.247-.553L2.232 0zm-2.188 3.464H7.612l.01.03.06.194.06.198a26.7 26.7 0 0 1 1.045 8.588c-.158 4.065-1.208 8.202-3.322 12.314a18 18 0 0 0-.277.562c-2.496 5.294-2.145 11.014-.02 16.503.374.966.774 1.838 1.172 2.6l.044.082h35.312l-.036-.08a30 30 0 0 1-.464-1.111l-.09-.232c-1.023-2.654-1.702-5.484-1.878-8.41-.225-3.733.392-7.377 2.016-10.822q.16-.339.332-.673c1.88-3.653 2.803-7.294 2.942-10.864a23.2 23.2 0 0 0-.909-7.474q-.227-.764-.466-1.386z"/>
+        </svg>
+      </div>
+      <div class="titleblock">
+        <div class="title">Save to Kalpa</div>
+        <div class="subtitle">Your universe of saved knowledge</div>
+      </div>
+    </div>
+
+    <div class="field-label">URL</div>
+    <div id="url" class="pill"></div>
+
+    <div class="field-label">Title</div>
+    <input id="titleInput" class="input" type="text" />
+
+    <div class="field-label">Universe (optional)</div>
+    <select id="loopSelect" class="input" disabled>
+      <option value="">No universe</option>
+    </select>
+    <div id="loopsNote" class="note"></div>
+    <!-- Hidden refresh button for edge cases -->
+    <button id="fetchTokenBtn" class="ghost-btn hidden">
+      Refresh universes
+    </button>
+    <div id="tokenStatus" class="msg" style="text-align:left;"></div>
+
+    <div class="row" style="margin-top:10px;">
+      <input id="includeSelection" type="checkbox" class="checkbox" />
+      <label for="includeSelection" class="subtitle">Include page selection</label>
+    </div>
+    <div class="row">
+      <input id="includeScreenshot" type="checkbox" class="checkbox" />
+      <label for="includeScreenshot" class="subtitle">Attach screenshot</label>
+    </div>
+
+    <button id="lashButton" class="button">Save to Kalpa</button>
+    <div id="message" class="msg"></div>
+
+    <!-- Auth Section (at bottom) -->
+    <div id="authSection" class="auth-section auth-section-bottom">
+      <!-- Signed In State -->
+      <div id="authSignedIn" class="auth-signed-in hidden">
+        <div class="auth-user">
+          <div id="authAvatar" class="auth-avatar">?</div>
+          <div class="auth-info">
+            <span class="auth-status">Signed in ✓</span>
+            <span id="authEmail" class="auth-email">Loading...</span>
+          </div>
+        </div>
+        <button id="signOutBtn" class="auth-signout">Sign out</button>
+      </div>
+      <!-- Signed Out State -->
+      <div id="authSignedOut" class="auth-signed-out hidden">
+        <div class="auth-warning">Sign in to save to your account and access AI features</div>
+        <button id="signInBtn" class="signin-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+          </svg>
+          Sign in to Kalpa
+        </button>
+      </div>
+      <!-- Loading State -->
+      <div id="authLoading" class="auth-signed-out">
+        <span class="auth-warning">Checking sign-in status...</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
