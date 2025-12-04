@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Kalpa - Save to Kalpa",
+  "name": "Kalpa",
   "version": "1.2.1",
   "description": "Save any webpage to your Kalpa universes",
-  "permissions": ["activeTab", "storage", "alarms", "cookies"],
+  "permissions": ["activeTab", "storage", "alarms"],
   "host_permissions": [
     "https://usekalpa.com/*",
     "https://convex.usekalpa.com/*"
